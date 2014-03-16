@@ -10,7 +10,7 @@
 --
 -------------------------------------------------------------------------------
 
-local DEVELOPER_ID = "a088e804-017e-4a03-ac49-3bf30eb87034";
+
 audio.setVolume( 0.75 )
 
 -- LIBS
@@ -26,4 +26,4 @@ display.setDefault( "minTextureFilter", "linear" )
 
 -- FUNCTIONS
 -------------------------------------------------------------------------------
-storyboard.gotoScene( "game" )
+storyboard.gotoScene( "intro" )
