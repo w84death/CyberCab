@@ -148,10 +148,11 @@ function drawLobby()
 
 
 	local msg = "MESSAGE FROM: Krzysztof Jankowski, CEO, Cyber Cab Corp.\n"..
-		"TITLE: Welcome in the corporation! Here\'s a litle info to help You start.\n\n"..
-		"We are the cab company for the rich business people. We transport them directly from their offices in the highest skyscrapers. Sometimes they want to move quickly form one floor to another. But most of the time they take a ride to another skyscraper at the exact floor. This saves they time and money. So travel time here is very important.\n"..
-		"Ofcourse you can never forget about the safety. There are lots of other flying cars out there. Also avoid any damage to the vehicle. And remember that cabs don't run on air so save fuel. Repair and refuel will be paid from your paycheck."
-
+		"TITLE: Welcome to the corporation! Here's a little info to help you start.\n"..
+    "We are a cab company for the rich business people. We transport them directly from their offices in the highest skyscrapers. Sometimes they want to move quickly from one floor to another, but most of the time they take a ride to the same floor in a different skyscraper. This saves them time and money, so travel time here is very important.\n"..
+    "Of course you can never forget about their safety, there are lots of other flying cars out there.\n"..
+    "Avoid damaging the vehicle, and remember that cabs don't run on air so save fuel. "..
+    "Repair and refuel will be taken from your paycheck."	
     showMessageBox(msg)
 
     layerBackground:insert( background )

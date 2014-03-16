@@ -15,7 +15,7 @@ local level = require("libs.levels")
 local Counters = require("libs.counters")
 local Perspective=require("libs.perspective")
 local camera=Perspective.createView()
-
+shakeamount = 0
 
 -- GLOBAL VIRABLES
 -----------------------------------------------------------------------------------------
@@ -44,6 +44,7 @@ local clients = {}
 local layerBackground = display.newGroup( )
 local layerGame = display.newGroup( )
 local layerGUI = display.newGroup( )
+local layerShakeable = display.newGroup( )
 
 -- FUNCTIONS
 -----------------------------------------------------------------------------------------
@@ -102,11 +103,11 @@ local function drawGUI()
    	engineYText:setFillColor ( 1,1,1 )
 
    	enginePowerVertical = Counters:newMeter()
-   	enginePowerVertical:init({vertical=true, x=420, y=82})
+   	enginePowerVertical:init({vertical=true, x=420, y=82,layer=layerGUI})
 	
 
    	enginePowerHorizontal = Counters:newMeter()
-   	enginePowerHorizontal:init({horizontal=true, x=460, y=95})
+   	enginePowerHorizontal:init({horizontal=true, x=460, y=95,layer=layerGUI})
 
 
    	local fuelText = display.newText( layerGUI, 'FUEL', 510,65, "Homenaje", 10 )    
@@ -118,7 +119,7 @@ local function drawGUI()
    	fuelValueText:setFillColor ( 1,1,1 )
 
    	engineFuel = Counters:newMeter()
-   	engineFuel:init({fuel=true, x=510, y=80})
+   	engineFuel:init({fuel=true, x=510, y=80,layer=layerGUI})
 
    	local damageText = display.newText( layerGUI, 'DAMAGE', 510,95, "Homenaje", 10 )    
     damageText.anchorX, damageText.anchorY = 0,0
@@ -129,7 +130,7 @@ local function drawGUI()
    	damageValueText:setFillColor ( 1,1,1 )
 
    	unitDamage = Counters:newMeter()
-   	unitDamage:init({damage=true, x=510, y=110})
+   	unitDamage:init({damage=true, x=510, y=110,layer=layerGUI})
 
    	-- GPS
 
@@ -381,6 +382,14 @@ function setCamera()
 	camera:setBounds(214,846,-196,342)
 end
 
+function shake(shakePower)
+	if( shakeamount > 0 )then
+	    local shake = math.random( shakeamount )
+	    layerShakeable.x = math.random( -shake, shake )
+	    layerShakeable.y = math.random( -shake, shake )
+	    shakeamount = shakeamount - 1
+	end
+end
 
 function init( group )
 	initPhysics()
@@ -396,7 +405,10 @@ function init( group )
 	layerGUI.alpha = 0
 	--]]--
    	group:insert(camera)
+   	layerShakeable:insert(camera)
+   	group:insert(layerShakeable)
    	group:insert(layerGUI)
+   	
 end
 
 function destroy()

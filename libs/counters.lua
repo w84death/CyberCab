@@ -84,7 +84,8 @@ function newMeter(params)
 		this.counter = display.newSprite( mySheet, counterAnimations )
 		this.counter.anchorX, this.counter.anchorY = 0,0
 		this.counter.x, this.counter.y = params.x,params.y
-		this.counter:setSequence( "1" )	
+		this.counter:setSequence( "1" )
+		params.layer:insert( this.counter )	
 	end
 
 	function this:setValue(params)

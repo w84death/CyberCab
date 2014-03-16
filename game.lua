@@ -14,7 +14,8 @@
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 local game = require("libs.game")
-local backgroundMusic = audio.loadSound( "media/sfx/game.mp3" )
+local backgroundMusic = audio.loadStream( "media/sfx/game.mp3" )
+local backgroundMusicChannel = audio.play( backgroundMusic, { loops=-1 }  )
 
 -- FUNCTIONS
 -------------------------------------------------------------------------------
@@ -71,6 +72,7 @@ local function onCollision( event )
 	    	local vx, vy = event.object2:getLinearVelocity()		
 			local dmg = math.max(vx,vy)
 			if(dmg>50)then
+				game.shakeamount = 15
 	    		game.collision({damage=dmg*0.1})
 	    		game.pushBack({x=vx, y=vy})
 	    	else
@@ -92,6 +94,7 @@ local function onCollision( event )
 end
 local function onEveryFrame()
 	game.runEngine()
+	game.shake()
 end
 
 function scene:createScene( event )
@@ -104,7 +107,7 @@ function scene:enterScene( event )
 	Runtime:addEventListener( "key" , onKeyEvent )
 	Runtime:addEventListener( "axis", onAxisEvent )
 	Runtime:addEventListener( "enterFrame", onEveryFrame )
-	--audio.play( backgroundMusic, { loops=-1 }  )
+	audio.play( backgroundMusicChannel, { loops=-1 }  )
 end
 
 function scene:exitScene( event )

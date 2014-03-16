@@ -12,7 +12,7 @@ local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 local lobby = require("libs.lobby")
 
-local backgroundMusic = audio.loadSound( "media/sfx/lobby.mp3" )
+local backgroundMusic = audio.loadStream( "media/sfx/lobby.mp3" )
 local backgroundMusicChannel = audio.play( backgroundMusic, { loops=-1 }  )
 
 local function onKeyEvent( event )	

@@ -24,4 +24,6 @@ globals.days = 		1
 globals.damage = 	0
 globals.fuel = 		100
 
+globals.gameTime = 	0
+
 return globals;

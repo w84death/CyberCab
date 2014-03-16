@@ -12,7 +12,7 @@ local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 local intro = require("libs.intro")
 
-local backgroundMusic = audio.loadSound( "media/sfx/menu.mp3" )
+local backgroundMusic = audio.loadStream( "media/sfx/menu.mp3" )
 local backgroundMusicChannel = audio.play( backgroundMusic, { loops=-1 }  ) 
 
 
