@@ -85,6 +85,7 @@ function new()
 			this.cab.xScale = 1
 		end
 		this.cab:setLinearVelocity( math.floor(this.engine.power.Sx*4), math.floor(this.engine.power.Sy*4))
+		globals.fuel = globals.fuel - 0.01
 	end
 
 	function this:stopCab()

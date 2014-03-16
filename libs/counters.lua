@@ -53,31 +53,32 @@ function newMeter(params)
 				width=110, height=10, 
 				numFrames=10, 
 				sheetContentWidth=110, 
-				sheetContentHeight=100 }
+				sheetContentHeight=110 }
 		end
 		if(params.damage)then
 			this.fuel = true
 			url = "media/gfx/fuel_damage.png"
 			sheetData = { 
 				width=110, height=10, 
-				numFrames=10, 
+				numFrames=11, 
 				sheetContentWidth=110, 
-				sheetContentHeight=100 }
+				sheetContentHeight=110 }
 		end
 
 		local mySheet = graphics.newImageSheet( url, sheetData )
 		 
 		local counterAnimations = {
-		    { name = "1", frames={1},time=100 },
-		    { name = "2", frames={2},time=100 },
-		    { name = "3", frames={3},time=100 },
-		    { name = "4", frames={4},time=100 },
-		    { name = "5", frames={5},time=100 },
-		    { name = "6", frames={6},time=100 },
-		    { name = "7", frames={7},time=100 },
-		    { name = "8", frames={8},time=100 },
-		    { name = "9", frames={9},time=100 },
-		    { name = "10", frames={10},time=100 },
+		    { name = "0", frames={1},time=100 },
+		    { name = "1", frames={2},time=100 },
+		    { name = "2", frames={3},time=100 },
+		    { name = "3", frames={4},time=100 },
+		    { name = "4", frames={5},time=100 },
+		    { name = "5", frames={6},time=100 },
+		    { name = "6", frames={7},time=100 },
+		    { name = "7", frames={8},time=100 },
+		    { name = "8", frames={9},time=100 },
+		    { name = "9", frames={10},time=100 },
+		    { name = "10", frames={11},time=100 },
 		}
 		 
 		this.counter = display.newSprite( mySheet, counterAnimations )

@@ -30,6 +30,10 @@ fromText = nil
 toText = nil
 engineXText = nil
 engineYText = nil
+engineFuel = nil
+fuelValueText = nil
+unitDamage = nil
+damageValueText = nil
 cbRadioTextToBrodcast = {}
 spawner = nil
 cashText = nil
@@ -105,11 +109,27 @@ local function drawGUI()
    	enginePowerHorizontal:init({horizontal=true, x=460, y=95})
 
 
-   	enginePowerHorizontal = Counters:newMeter()
-   	enginePowerHorizontal:init({fuel=true, x=510, y=80})
+   	local fuelText = display.newText( layerGUI, 'FUEL', 510,65, "Homenaje", 10 )    
+    fuelText.anchorX, fuelText.anchorY = 0,0
+   	fuelText:setFillColor ( 0,0.34,0.52 )
 
-   	enginePowerHorizontal = Counters:newMeter()
-   	enginePowerHorizontal:init({damage=true, x=510, y=110})
+	fuelValueText = display.newText( layerGUI, math.floor(globals.fuel), 615,60, "Homenaje", 14 )    
+    fuelValueText.anchorX, fuelValueText.anchorY = 1,0
+   	fuelValueText:setFillColor ( 1,1,1 )
+
+   	engineFuel = Counters:newMeter()
+   	engineFuel:init({fuel=true, x=510, y=80})
+
+   	local damageText = display.newText( layerGUI, 'DAMAGE', 510,95, "Homenaje", 10 )    
+    damageText.anchorX, damageText.anchorY = 0,0
+   	damageText:setFillColor ( 0,0.34,0.52 )
+
+   	damageValueText = display.newText( layerGUI, math.floor(globals.damage), 615,90, "Homenaje", 14 )    
+    damageValueText.anchorX, damageValueText.anchorY = 1,0
+   	damageValueText:setFillColor ( 1,1,1 )
+
+   	unitDamage = Counters:newMeter()
+   	unitDamage:init({damage=true, x=510, y=110})
 
    	-- GPS
 
@@ -134,21 +154,6 @@ local function drawGUI()
 	cashText = display.newText( layerGUI, globals.cash, 580,170, "Homenaje", 24 )    
     cashText.anchorX, cashText.anchorY = 0,0
    	cashText:setFillColor ( 0.64,0.81,0.15 )   	
-
-   	-- GARAGE
-   	--[[
-
-   	
-
-	local fuelText = display.newText( layerGUI, 'FUEL: 100 %', 420,300, "Homenaje", 12 )    
-    fuelText.anchorX, fuelText.anchorY = 0,0
-   	fuelText:setFillColor ( 0.63,0.8,0.15 )   	
-
-   	local damageText = display.newText( layerGUI, 'DAMAGE: 0 %', 620,300, "Homenaje", 12 )    
-    damageText.anchorX, damageText.anchorY = 1,0
-   	damageText:setFillColor ( 0.63,0.8,0.15 )
-	]]
-
 
    	-- SYSTEM LOG
    	systemLog = display.newText( layerGUI, 'SYSTEM LOG', 420,225, "Homenaje", 14 )    
@@ -285,9 +290,21 @@ function playerLandedOnPlatform( params )
 	end
 end
 
+function collision(params)
+	print(globals.damage)
+	print(params.damage)
+	globals.damage = globals.damage + params.damage
+end
+
+function pushBack(params)
+	player.engine.power.x, player.engine.power.Sx = 0,player.engine.power.Sx * -0.5
+	player.engine.power.y, player.engine.power.Sy = 0,player.engine.power.Sy * -0.5
+	--player.cab:applyLinearImpulse( params.x * -1.5, params.y * -1.5, player.cab.x, player.cab.y)
+end
+
 function runEngine()
 	if(player.engine.on)then
-		player:runEngine()
+		player:runEngine()				
 	end
 
 	local sXpower = math.floor(math.abs(player.engine.power.Sx))
@@ -298,9 +315,17 @@ function runEngine()
 
 	local sxPercentage = math.floor( (sXpower / 60) * 10 )
 	local syPercentage = math.floor( (sYpower / 60) * 10 )
+	local sFuel = math.floor( (globals.fuel / 100) * 10 )
+	local sDamage = math.floor( (globals.damage / 100) * 10 )
 
 	enginePowerHorizontal:setValue({frame=tostring(syPercentage)})
 	enginePowerVertical:setValue({frame=tostring(sxPercentage)})
+	
+	engineFuel:setValue({frame=tostring(sFuel)})
+	fuelValueText.text = tostring(math.floor(globals.fuel))
+
+	unitDamage:setValue({frame=tostring(sDamage)})
+	damageValueText.text = tostring(math.floor(globals.damage))
 
 end
 

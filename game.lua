@@ -66,12 +66,24 @@ end
 
 local function onCollision( event )
     if ( event.phase == "began" ) then    	
-    	if(event.object1.name == "platform")then
-    		local position = {}
-    		position.x = event.object1.x
-    		position.y = event.object1.y
-        	game.playerLandedOnPlatform({landed=true, position=position, letter=event.object1.letter, flip=event.object1.flip})
-    	end
+
+    	if(event.object2.name == "player")then
+	    	local vx, vy = event.object2:getLinearVelocity()		
+			local dmg = math.max(vx,vy)
+			if(dmg>50)then
+	    		game.collision({damage=dmg*0.1})
+	    		game.pushBack({x=vx, y=vy})
+	    	else
+
+		    	if(event.object1.name == "platform")then
+		    		local position = {}
+		    		position.x = event.object1.x
+		    		position.y = event.object1.y
+		        	game.playerLandedOnPlatform({landed=true, position=position, letter=event.object1.letter, flip=event.object1.flip})
+		    	end
+		    end
+		end
+
     elseif ( event.phase == "ended" ) then
     	if(event.object1.name == "platform")then
         	game.playerLandedOnPlatform({exit=true})
