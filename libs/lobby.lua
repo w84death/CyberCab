@@ -177,13 +177,11 @@ end
 function highlightActiveButton()
 	stopButtonsHighlights()
 	buttonList[activeButton.row][activeButton.col]:highlight()
-	print('active button: '..activeButton.row..'|'..activeButton.col)
 end
 
 function executeButton()
 	local cmd = buttonList[activeButton.row][activeButton.col].command
-	if( cmd == 'startGame' )then
-		print('starting game')
+	if( cmd == 'startGame' )then		
 		return 'game'
 	end
 	if( cmd == 'refuel' )then

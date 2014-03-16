@@ -16,8 +16,6 @@ module(..., package.seeall)
 function new()
 	local this = {}
 	this.landedOn = nil
-	this.fuel = 		100
-	this.damage = 		0
 	this.density =		1.0
 	this.doorOpen =		false
 	this.hasClient =	false
@@ -79,7 +77,7 @@ function new()
 		this.engine.power.Sx = this.k * this.engine.power.Sx + (1.0 - this.k) * this.engine.power.x
 		this.engine.power.Sy = this.k * this.engine.power.Sy + (1.0 - this.k) * this.engine.power.y
 		
-		if(this.engine.power.x > 0)then
+		if(this.engine.power.Sx > 0)then
 			this.cab.xScale = -1
 		else
 			this.cab.xScale = 1

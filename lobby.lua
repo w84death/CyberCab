@@ -95,9 +95,10 @@ function scene:exitScene( event )
 end
 
 function scene:destroyScene( event )
-	local group = self.view
-	game.destroy()	
+	local group = self.view	
 	Runtime:removeEventListener( "key" , onKeyEvent )
+	lobby.destroy()
+	package.loaded[lobby] = nil
 end
 
 -- EVENTS

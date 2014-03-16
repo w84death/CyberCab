@@ -26,4 +26,4 @@ display.setDefault( "minTextureFilter", "linear" )
 
 -- FUNCTIONS
 -------------------------------------------------------------------------------
-storyboard.gotoScene( "game" )
+storyboard.gotoScene( "intro" )

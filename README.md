@@ -9,7 +9,7 @@
 ## Game
 CyberCab is a arcade-platformer simulator of a cab in the far future.
 
-Game is OUYA exclusive title. It will be it in the OUYA store when finished. To this time you can download .apk file from here and side-load it to the console.
+Game is OUYA exclusive title. It will be it in the OUYA store when finished. To this time you can download .apk file from [p1x.in/g/cybercab](http://p1x.in/g/cybercab) and side-load it to the console.
 
 ## Don't have OUYA?
 

@@ -292,8 +292,6 @@ function playerLandedOnPlatform( params )
 end
 
 function collision(params)
-	print(globals.damage)
-	print(params.damage)
 	globals.damage = globals.damage + params.damage
 end
 
@@ -332,6 +330,7 @@ end
 
 local function initPhysics()
 	physics.start()
+	physics.pause()
 	physics.setGravity( 0, 40 )
 	physics.setScale( 30 )
 	physics.setPositionIterations( 16 )
@@ -343,9 +342,9 @@ end
 
 local function initPlayer()	
 	player = Player:new()
-	player:init({x=320,y=360})	
+	player:init({x=320,y=180})
 	camera:add(player.cab, 2, false)
-	camera:setFocus(player.cab)
+	camera:setFocus(player.cab)	
 end
 
 local function spawnClient()
@@ -391,6 +390,11 @@ function shake(shakePower)
 	end
 end
 
+function startPhysics()
+	physics.start()
+	player:stopCab()
+end
+
 function init( group )
 	initPhysics()
 	setCamera()
@@ -408,8 +412,17 @@ function init( group )
    	layerShakeable:insert(camera)
    	group:insert(layerShakeable)
    	group:insert(layerGUI)
-   	
+
+   	timer.performWithDelay( 500, startPhysics ,1 )
 end
+
+function checkGameOver()
+	if(globals.damage > 100 or globals.fuel < 0)then
+		return true
+	end
+	return false
+end
+
 
 function destroy()
 end

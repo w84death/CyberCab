@@ -10,7 +10,7 @@
 
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
-local intro = require("libs.intro")
+local GO = require("libs.gameover")
 
 local backgroundMusic = audio.loadStream( "media/sfx/menu.mp3" )
 local backgroundMusicChannel = audio.play( backgroundMusic, { loops=-1 }  ) 
@@ -18,13 +18,15 @@ local backgroundMusicChannel = audio.play( backgroundMusic, { loops=-1 }  )
 
 local function onKeyEvent( event )
 	if ( event.keyName == "buttonA" and event.phase == "up") then
-		storyboard.gotoScene( "lobby", "fade", 500 )		
+		storyboard.purgeAll()
+		storyboard.gotoScene( "intro", "fade", 500 )		
 	end
 end
 
 function scene:createScene( event )
 	local group = self.view
-	intro.init(group)
+	GO.init(group)
+
 end
 
 function scene:enterScene( event )
@@ -43,7 +45,7 @@ function scene:destroyScene( event )
 	local group = self.view
 	intro.destroy()
 	Runtime:removeEventListener( "key" , onKeyEvent )
-	package.loaded[intro] = nil
+	package.loaded[GO] = nil
 end
 
 -- EVENTS

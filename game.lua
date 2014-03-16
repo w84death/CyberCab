@@ -14,6 +14,7 @@
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 local game = require("libs.game")
+
 local backgroundMusic = audio.loadStream( "media/sfx/game.mp3" )
 local backgroundMusicChannel = audio.play( backgroundMusic, { loops=-1 }  )
 
@@ -95,6 +96,9 @@ end
 local function onEveryFrame()
 	game.runEngine()
 	game.shake()
+	if(game.checkGameOver())then
+		storyboard.gotoScene( 'gameover', "fade", 500 )		
+	end
 end
 
 function scene:createScene( event )
@@ -124,6 +128,7 @@ function scene:destroyScene( event )
 	Runtime:removeEventListener( "key" , onKeyEvent )
 	Runtime:removeEventListener( "axis", onAxisEvent )
 	Runtime:removeEventListener( "enterFrame", onEveryFrame )
+	package.loaded[game] = nil
 end
 
 -- EVENTS
