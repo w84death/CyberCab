@@ -331,7 +331,7 @@ end
 
 local function initPhysics()
 	physics.start()
-	physics.setGravity( 0, 4 )
+	physics.setGravity( 0, 40 )
 	physics.setScale( 30 )
 	physics.setPositionIterations( 16 )
 	physics.setVelocityIterations( 6 )
