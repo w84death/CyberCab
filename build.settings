@@ -1,0 +1,27 @@
+-- Supported values for orientation:
+-- portrait, portraitUpsideDown, landscapeLeft, landscapeRight
+
+settings = {
+    
+    orientation = {
+        default = "landscapeLeft", 
+        supported = { "landscapeLeft", },
+    },
+    
+    android =
+    {
+        mainIntentFilter =
+        {
+            categories = { "tv.ouya.intent.category.GAME" },
+        }
+    },
+    
+    --[[
+    -- Android permissions
+
+    androidPermissions = {
+        "android.permission.INTERNET",
+    },
+
+    ]]--
+}
